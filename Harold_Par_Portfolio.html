@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --ink-soft: #3a3a3a;
+    --ink-muted: #767676;
+    --surface: #faf9f6;
+    --surface-warm: #f4f0e8;
+    --surface-card: #ffffff;
+    --accent: #c84b2f;
+    --accent-soft: #f5e9e5;
+    --accent-mid: #e07050;
+    --teal: #1a6b6b;
+    --teal-soft: #e3f0ef;
+    --border: #e0dbd0;
+    --border-strong: #c0bbb0;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--surface);
+    color: var(--ink);
+    line-height: 1.65;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ──────────────────────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(250,249,246,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2.5rem;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: var(--ink-muted);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ──────────────────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 58px;
+  }
+
+  .hero-left {
+    padding: 8rem 4rem 6rem 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid var(--border);
+  }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    color: var(--accent-mid);
+    margin-bottom: 2rem;
+    line-height: 1.2;
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    max-width: 460px;
+    line-height: 1.75;
+    margin-bottom: 3rem;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 2.4rem;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-top: 0.3rem;
+  }
+
+  .hero-right {
+    background: var(--surface-warm);
+    padding: 8rem 4rem 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .hero-right-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .expertise-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    list-style: none;
+  }
+
+  .expertise-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+    padding: 1rem 1.25rem;
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .expertise-item:hover {
+    border-color: var(--accent);
+    transform: translateX(4px);
+  }
+
+  .expertise-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .expertise-icon.coral { background: var(--accent-soft); }
+  .expertise-icon.teal  { background: var(--teal-soft); }
+  .expertise-icon.sand  { background: #f0ebe0; }
+
+  .expertise-text strong {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.15rem;
+  }
+
+  .expertise-text span {
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+  }
+
+  /* ── SECTION WRAPPERS ─────────────────────────────────── */
+  section { padding: 6rem 5rem; }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .section-num {
+    font-family: var(--serif);
+    font-size: 3.5rem;
+    color: var(--border-strong);
+    line-height: 1;
+    user-select: none;
+  }
+
+  .section-title-block {
+    border-left: 3px solid var(--accent);
+    padding-left: 1.25rem;
+  }
+
+  .section-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: 2.2rem;
+    color: var(--ink);
+    line-height: 1.15;
+  }
+
+  /* ── CASE STUDIES ─────────────────────────────────────── */
+  #work { background: var(--surface); }
+
+  .case-study {
+    margin-bottom: 5rem;
+    padding-bottom: 5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .case-study:last-child { border-bottom: none; margin-bottom: 0; }
+
+  .case-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+    flex-wrap: wrap;
+  }
+
+  .case-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+
+  .tag-coral { background: var(--accent-soft); color: var(--accent); }
+  .tag-teal  { background: var(--teal-soft); color: var(--teal); }
+  .tag-sand  { background: #f0ebe0; color: #7a6840; }
+  .tag-slate { background: #e8eaf0; color: #3a4070; }
+  .tag-sage { background: #E3EEE8; color: #4F6B5A; }
+  .tag-terracotta { background: #F3DDD6; color: #A14E35; }
+
+
+  .case-company {
+    font-size: 0.75rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.06em;
+  }
+
+  .case-title {
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    color: var(--ink);
+    line-height: 1.2;
+    max-width: 780px;
+    margin-bottom: 1.25rem;
+  }
+
+  .case-subtitle {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    max-width: 680px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  /* flow steps */
+  .flow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 2.5rem;
+  }
+
+  .flow-step {
+    background: var(--surface-card);
+    padding: 1.5rem 1.25rem;
+    position: relative;
+  }
+
+  .flow-step-label {
+    font-size: 0.67rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 0.6rem;
+  }
+
+  .flow-step.problem .flow-step-label { color: var(--accent); }
+  .flow-step.hypothesis .flow-step-label { color: #c07030; }
+  .flow-step.execution .flow-step-label { color: var(--teal); }
+  .flow-step.result .flow-step-label { color: #3a6b30; }
+
+  .flow-step-content {
+    font-size: 0.87rem;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  .result-highlight {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: #edf5ec;
+    color: #2a5a25;
+    font-size: 0.82rem;
+    font-weight: 500;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+  }
+
+  .learning-block {
+    display: flex;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--surface-warm);
+    border-left: 3px solid var(--ink-muted);
+    border-radius: 0 8px 8px 0;
+    margin-top: 1.5rem;
+  }
+
+  .learning-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--ink-muted);
+    white-space: nowrap;
+    margin-top: 0.1rem;
+  }
+
+  .learning-text {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    font-style: italic;
+  }
+
+  /* ── RESULTS STRIP ─────────────────────────────────────── */
+  #results {
+    background: var(--accent);
+    padding: 4.5rem 5rem;
+    color: white;
+  }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .result-card {
+    border-top: 1px solid rgba(255,255,255,0.25);
+    padding-top: 1.5rem;
+  }
+
+  .result-num {
+    font-family: var(--serif);
+    font-size: 3rem;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .result-detail {
+    font-size: 0.85rem;
+    opacity: 0.75;
+    line-height: 1.55;
+  }
+
+  /* ── ABOUT / APPROACH ─────────────────────────────────── */
+  #about {
+    background: var(--surface-warm);
+    padding: 6rem 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-size: 1.02rem;
+    color: var(--ink-soft);
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+  }
+
+  .skills-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .skill-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .skill-name {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .skill-bar-bg {
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .skill-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.8s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .skill-bar-fill.animated { transform: scaleX(1); }
+
+  /* ── FOOTER ──────────────────────────────────────────────  */
+  footer {
+    background: var(--warm);
+    color: #555;
+    padding: 2.5rem 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+  }
+
+  footer span { color: #333; }
+
+  /* ── ANIMATIONS ─────────────────────────────────────────── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 5rem 2rem 4rem; }
+    section, #approach, #results, #about, footer { padding: 4rem 2rem; }
+    .flow { grid-template-columns: 1fr 1fr; }
+    .steps-grid { grid-template-columns: repeat(4, 1fr); }
+    .results-grid { grid-template-columns: 1fr 1fr; }
+    #about { grid-template-columns: 1fr; gap: 2.5rem; }
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body id="top">
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Harold's Portfolio</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#work">Case Studies</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Product Portfolio</p>
+    <h1 class="hero-name">Harold Par</h1>
+    <p class="hero-title">Product Manager &amp;<br>Product Marketing Manager</p>
+    <p class="hero-desc">
+<a href="https://www.linkedin.com/in/haroldpar/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+  <svg xmlns="http://w3.org" viewBox="0 0 24 24" width="25" height="25" fill="#0A66C2">
+    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+  </svg>https://www.linkedin.com/in/haroldpar/
+</a>
+<br>
+&#9993; <a href="mailto:harold.par27@gmail.com">
+harold.par27@gmail.com
+</a>
+    </p>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">8+</span>
+        <span class="stat-label">Years Experience</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">4</span>
+        <span class="stat-label">Major Products Launched</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <p class="hero-right-label">Core Expertise</p>
+    <ul class="expertise-list">
+      <li class="expertise-item">
+        <div class="expertise-icon coral">🎯</div>
+        <div class="expertise-text">
+          <strong>Product Strategy &amp; Ownership</strong>
+          <span>Product Roadmap, OKRs, Cross-functional leadership</span>
+        </div>
+      </li>
+      <li class="expertise-item">
+        <div class="expertise-icon teal">📊</div>
+        <div class="expertise-text">
+          <strong>Data-Driven Problem Solving</strong>
+          <span>Problem Definition, Data Analysis, A/B Testing
+        </div>
+      </li>
+      <li class="expertise-item">
+        <div class="expertise-icon sand">🚀</div>
+        <div class="expertise-text">
+          <strong>Go-to-Market Execution</strong>
+          <span>Product Launch, Messaging & Positioning, Sales Enablement</span>
+        </div>
+      </li>
+      <li class="expertise-item">
+        <div class="expertise-icon coral">💰</div>
+        <div class="expertise-text">
+          <strong>Revenue &amp; Monetization</strong>
+          <span>P&amp;L Management, Pricing strategy</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-left fade-up">
+    <div class="section-header" style="margin-bottom: 2rem">
+      <span class="section-num">01</span>
+      <div class="section-title-block">
+        <p class="section-eyebrow">About Me</p>
+        <h2 class="section-title">Product Manager / Product Marketing</h2>
+      </div>
+    </div>
+
+    <div class="about-text">
+      <p>
+        I'm a results-driven product manager &amp; marketer based in Seoul with 8+ years of experience building and scaling products across tech, e-commerce, telecom, and consumer electronics industries.
+      </p>
+      <p>
+        I have successfully launched and managed 4 major products across different industries, consistently driving market share growth, exceeding revenue targets, and achieving business goals.
+      </p>
+      <p>
+        I hold an MBA with concentrations in Strategy, Marketing, Digital Transformation, and Finance — which means I think about products from the P&amp;L down, not just the user up. That cross-functional lens has been the foundation of every outcome I've driven.
+      </p>
+    </div>
+  </div>
+
+  <div class="skills-grid fade-up">
+    <p style="font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.5rem;">Skills &amp; Capabilities</p>
+
+    <div class="skill-row">
+      <span class="skill-name">Product Strategy &amp; Ownership</span>
+      <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 95%"></div></div>
+    </div>
+    <div class="skill-row">
+      <span class="skill-name">Go-to-Market Strategy</span>
+      <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 95%"></div></div>
+    </div>
+    <div class="skill-row">
+      <span class="skill-name">Market Research & Data Analysis</span>
+      <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 90%"></div></div>
+    </div>
+    <div class="skill-row">
+      <span class="skill-name">Revenue &amp; P&amp;L Management</span>
+      <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 95%"></div></div>
+    </div>
+    <div class="skill-row">
+      <span class="skill-name">Cross-Functional Leadership</span>
+      <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 90%"></div></div>
+    </div>
+    <div class="skill-row">
+      <span class="skill-name">Problem-solving (McKinsey 7-Step Process)</span>
+      <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 80%"></div></div>
+    </div>
+
+    <div style="margin-top: 1.5rem; padding: 1.25rem; background: var(--surface-card); border: 1px solid var(--border); border-radius: 8px;">
+      <p style="font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.75rem;">Industries</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+        <span class="case-tag tag-coral">Tech</span>
+        <span class="case-tag tag-teal">E-Commerce</span>
+        <span class="case-tag tag-sand">Telecom</span>
+        <span class="case-tag tag-sage">Consumer Electronics</span>
+        <span class="case-tag tag-slate">FMCG</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS STRIP -->
+<section id="results">
+  <div class="section-header">
+    <span class="section-num" style="color: rgba(255,255,255,0.15)">02</span>
+    <div class="section-title-block" style="border-left-color: rgba(255,255,255,0.4)">
+      <p class="section-eyebrow" style="color: rgba(255,255,255,0.6)">By the Numbers</p>
+      <h2 class="section-title" style="color: white">Consistent results across industries and markets</h2>
+    </div>
+  </div>
+
+  <div class="results-grid">
+    <div class="result-card">
+      <div class="result-num">+30%</div>
+      <div class="result-detail">Year-on-year profit growth — #1 among all LG subsidiaries across APAC</div>
+    </div>
+    <div class="result-card">
+      <div class="result-num">113%</div>
+      <div class="result-detail">Gross revenue target achieved during Lazada's largest annual sales campaign</div>
+    </div>
+    <div class="result-card">
+      <div class="result-num">105%</div>
+      <div class="result-detail">Annual revenue target achievement at Globe Telecom</div>
+    </div>
+    <div class="result-card">
+      <div class="result-num">6</div>
+      <div class="result-detail">Consecutive quarters with positive EBITDA at Globe Telecom</div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section id="work">
+  <div class="section-header fade-up">
+    <span class="section-num">03</span>
+    <div class="section-title-block">
+      <p class="section-eyebrow">Selected Work</p>
+      <h2 class="section-title">Case Studies</h2>
+    </div>
+  </div>
+
+  <!-- CASE 1: Website Redesign -->
+  <div class="case-study fade-up">
+    <div class="case-meta">
+      <span class="case-tag tag-teal">UX &amp; Growth</span>
+      <span class="case-tag tag-slate">Web Product</span>
+      <span class="case-company">Tridge · B2B Tech · South Korea</span>
+    </div>
+    <h3 class="case-title">Redesigning the User Journey to Reverse High Bounce Rates and Drive Engagement</h3>
+    <p class="case-subtitle">We discovered that users were leaving the website before exploring Tridge’s products leading to high bounce rate.</p>
+
+    <div class="flow">
+      <div class="flow-step problem">
+        <div class="flow-step-label">Problem</div>
+        <div class="flow-step-content">High bounce rates indicated users were not finding what they expected on arrival which signals misalignment between traffic intent, landing page messaging, and navigation architecture.</div>
+      </div>
+      <div class="flow-step hypothesis">
+        <div class="flow-step-label">Hypothesis</div>
+        <div class="flow-step-content">Restructuring the navigation hierarchy and rewriting the homepage around clearer user journeys would reduce friction and increase time-on-site and engagement.</div>
+      </div>
+      <div class="flow-step execution">
+        <div class="flow-step-label">Execution</div>
+        <div class="flow-step-content">Conducted user session analysis and reviews to identify drop-off patterns. Collaborated with front-end developers to redesign the homepage layout, simplify navigation, and realign CTAs to user intent. Ran iterative tests on key landing pages before full rollout.</div>
+      </div>
+      <div class="flow-step result">
+        <div class="flow-step-label">Result &amp; Learning</div>
+        <div class="flow-step-content">
+          Achieved 11% increase in user engagement.
+          <br>
+          <span class="result-highlight">↑ Engagement</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CASE 2: Lazada CPC -->
+  <div class="case-study fade-up">
+    <div class="case-meta">
+      <span class="case-tag tag-coral">Product Launch</span>
+      <span class="case-tag tag-teal">Monetization</span>
+      <span class="case-company">Lazada · E-Commerce Platform · Philippines</span>
+    </div>
+    <h3 class="case-title">Launching Two CPC Ad Solutions to Unlock Merchant Revenue — New Product Launcher &amp; First Search Slot</h3>
+    <p class="case-subtitle">Merchants using Lazada needed better solutions/tools to drive traffic and sales for new listings. We identified the monetization gap, built the go-to-market strategy, and launched two CPC products that increased both seller adoption and platform revenue.</p>
+
+    <div class="flow">
+      <div class="flow-step problem">
+        <div class="flow-step-label">Problem</div>
+        <div class="flow-step-content">Merchants launching new products struggled with discoverability. The platform had no dedicated CPC solutions to boost new listings or guarantee high-visibility search placements, leaving potential additional revenue unrealized.</div>
+      </div>
+      <div class="flow-step hypothesis">
+        <div class="flow-step-label">Hypothesis</div>
+        <div class="flow-step-content">Two targeted CPC products, one for boosting new product listings’ visibility, one for premium search placement, would address the issue in discoverability, increasing seller adoption and ad revenue simultaneously.</div>
+      </div>
+      <div class="flow-step execution">
+        <div class="flow-step-label">Execution</div>
+        <div class="flow-step-content">Managed full product roadmap for CPC solutions. Collaborated with engineering on UX/UI improvements. Crafted user education guides and onboarding materials. Executed email and in-app message campaigns targeting the right merchant segments. Conducted sales team trainings to drive adoption and oversaw end-to-end launch timelines.</div>
+      </div>
+      <div class="flow-step result">
+        <div class="flow-step-label">Result &amp; Learning</div>
+        <div class="flow-step-content">
+          New Product Launcher increased merchant adoption rates and First Search Slot increased gross revenue.
+          <br>
+          <span class="result-highlight">↑ ARPU</span>
+          <span class="result-highlight">↑ Adoption</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CASE 3: Globe / Zoom -->
+  <div class="case-study fade-up">
+    <div class="case-meta">
+      <span class="case-tag tag-coral">Strategic Pivot</span>
+      <span class="case-tag tag-sand">Revenue Recovery</span>
+      <span class="case-company">Globe Telecom · Telecom · Philippines</span>
+    </div>
+    <h3 class="case-title">Reversing Pandemic-Driven Revenue Collapse by Launching Zoom as a Core B2B Service</h3>
+    <p class="case-subtitle">When COVID-19 forced most offices to shift to a work-from-home setup, Globe's B2B voice revenue was in danger. Rather than defend a declining product, we identified an opportunity, secured a distribution partnership with Zoom, and generated a new major source of revenue for the voice business.</p>
+
+    <div class="flow">
+      <div class="flow-step problem">
+        <div class="flow-step-label">Problem</div>
+        <div class="flow-step-content">Business customers suspended their subscription to traditional voice services as government-mandated lockdowns emptied offices. The revenue base was rapidly decreasing. Legacy voice products could not serve a remote-first business environment.</div>
+      </div>
+      <div class="flow-step hypothesis">
+        <div class="flow-step-label">Hypothesis</div>
+        <div class="flow-step-content">Repositioning the Voice portfolio to include cloud collaboration tools (specifically Zoom), which businesses were starting to seek, would capture the demand shift and more than offset the voice revenue decline.</div>
+      </div>
+      <div class="flow-step execution">
+        <div class="flow-step-label">Execution</div>
+        <div class="flow-step-content">Negotiated and formalized the Zoom distribution partnership. Built a comprehensive internal product playbook to enable rapid sales team onboarding. Created the service-level agreement framework for issue escalation. Designed bundling and promotional offers with existing products to maximize uptake. Managed back-end operational processes to ensure delivery readiness.</div>
+      </div>
+      <div class="flow-step result">
+        <div class="flow-step-label">Result &amp; Learning</div>
+        <div class="flow-step-content">
+          Succesfully launched Zoom on time and achieved 105% of FY2020 annual revenue target despite the pandemic.
+          <br>
+          <span class="result-highlight">105% Revenue Target</span>
+          <span class="result-highlight">6 Consecutive Quarters with +EBITDA</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CASE 4: LG Audio -->
+  <div class="case-study fade-up">
+    <div class="case-meta">
+      <span class="case-tag tag-sand">Pricing Strategy</span>
+      <span class="case-tag tag-teal">Market Expansion</span>
+      <span class="case-company">LG Electronics · Consumer Electronics · Philippines </span>
+    </div>
+    <h3 class="case-title">Achieving Highest Profit Growth in APAC Through Structured Pricing Strategy and Demand Forecasting</h3>
+    <p class="case-subtitle">Facing an aggressive profit growth target, I restructured the pricing and go-to-market strategy for LG's audio portfolio, moving from reactive promotions to a hypothesis-driven, data-validated approach that unlocked both volume and margin expansion.</p>
+
+    <div class="flow">
+      <div class="flow-step problem">
+        <div class="flow-step-label">Problem</div>
+        <div class="flow-step-content">Despite meeting prior-year targets, an aggressive new annual sales goal required strategy improvements. Pricing was reactive to competition, demand forecasting required more precision, and premium model adoption was constrained by purchase accessibility.</div>
+      </div>
+      <div class="flow-step hypothesis">
+        <div class="flow-step-label">Hypothesis</div>
+        <div class="flow-step-content">A data-driven pricing strategy that's built on market research, competitor benchmarking, and channel-specific promotional programs, combined with rigorous demand forecasting to eliminate inventory inefficiencies, would drive both unit volume and margin simultaneously.</div>
+      </div>
+      <div class="flow-step execution">
+        <div class="flow-step-label">Execution</div>
+        <div class="flow-step-content">Conducted structured market research and competitive analysis to define product positioning and pricing. Designed nationwide and per-channel dealer programs to increase both market share and in-store conversion. Built demand forecasting models using historical sales trends. Managed the product roadmap, selecting which models to launch, retain, or phase out, and deployed financing promotions to increase premium model accessibility.</div>
+      </div>
+      <div class="flow-step result">
+        <div class="flow-step-label">Result &amp; Learning</div>
+        <div class="flow-step-content">
+          +21% units sold YoY. 100% sales target achievement. 30% profit growth — the highest among all LG subsidiaries in APAC that year. Long-term inventory below 2% company benchmark.
+          <br>
+          <span class="result-highlight">+30% YoY Profit</span>
+          <span class="result-highlight">#1 Profit Growth in APAC</span>
+          <span class="result-highlight">100% Sales Target Achievement</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span style="font-family: var(--serif); font-size: 1rem; color: #888">Harold Par · Portfolio</span>
+  <span>Seoul, South Korea · Available for opportunities</span>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.skill-bar-fill').forEach((bar, i) => {
+          setTimeout(() => bar.classList.add('animated'), i * 80);
+        });
+        barObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  const skillsGrid = document.querySelector('.skills-grid');
+  if (skillsGrid) barObserver.observe(skillsGrid);
+</script>
+</body>
+</html>
